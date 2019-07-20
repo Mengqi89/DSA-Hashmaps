@@ -133,7 +133,7 @@ const WhatDoesThisDo = function () {
     console.log(map1.get(str1));
     console.log(map2.get(str3));
 }
-WhatDoesThisDo()
+// WhatDoesThisDo()
 
 
 
@@ -168,3 +168,68 @@ WhatDoesThisDo()
 //10 % 9 = 1
 
 // {0, 28* -> 19* -> 10*, 20*, 12*, 4, 5* -> 33*, 15*, 7, 17*}
+
+// 4. Remove duplicates
+
+function rvDuplicates(str) {
+    let emptyStr = ""
+
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === ' ') {
+            emptyStr += str[i]
+        } else if (!emptyStr.includes(str[i])) {
+            emptyStr += str[i]
+        }
+    }
+    console.log(emptyStr)
+    return emptyStr
+}
+
+// rvDuplicates('google all that you think can think of')
+
+// 5. Any permutation a palindrome
+function isPalindrome(str) {
+    const tempArr = []
+
+    for (let i = 0; i < str.length; i++) {
+        if (tempArr.includes(str[i])) {
+            tempArr.splice(tempArr.indexOf(str[i]), 1)
+        } else {
+            tempArr.push(str[i])
+        }
+    }
+
+    return tempArr.length <= 1
+}
+// console.log(isPalindrome("acecarr"))
+// console.log(isPalindrome("acedacaaarr"))
+
+// 6. Anagram grouping
+// Write an algorithm to group a list of words into anagrams.For example, if the input was['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race'], the output should be: [['east', 'teas', 'eats'], ['cars', 'arcs'], ['acre', 'race']].
+
+function anagram(arr) {
+    const outerArr = []
+
+    function equalStr(str1, str2) {
+        let arr1 = str1.split("")
+
+        for (let i = 0; i < str2.length; i++) {
+            if (arr1.includes(str2[i])) {
+                arr1.splice(arr1.indexOf(str2[i]), 1)
+            }
+
+        }
+        return arr1.length === 0
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < outArr.length; j++) {
+            // if (equalStr(outerArr[j], arr[i])) {
+            // }
+            outArr = [...outerArr, [arr[i]]]
+            console.log(outerArr)
+        }
+    }
+}
+
+anagram()
