@@ -7,7 +7,7 @@ class HashMap {
     }
 
     get(key) {
-        const index = this._findSlot(key);
+        const index = this._findSlot(key); //meep: 4, elf: 5
         if (this._hashTable[index] === undefined) {
             throw new Error('Key error');
         }
@@ -49,7 +49,7 @@ class HashMap {
 
         for (let i = start; i < start + this._capacity; i++) {
             const index = i % this._capacity;
-            const slot = this._hashTable[index];
+            const slot = this._hashTable[index]
             if (slot === undefined || (slot.key === key && !slot.DELETED)) {
                 return index;
             }
@@ -87,16 +87,84 @@ class HashMap {
     }
 }
 
-const hashMap = new HashMap()
-console.log(hashMap._findSlot('hi'))
-console.log(hashMap.set('soda', 'sprite'))
-console.log(hashMap.set('food', 'dumplings'))
-console.log(hashMap)
-console.log('table', hashMap._hashTable[4])
-console.log('get', hashMap.get('soda'))
-hashMap.delete('soda')
-hashMap.delete('food')
-console.log('FIRST DELETE', hashMap)
-// hashMap.delete('soda')
-console.log('SECOND DELETE', hashMap)
 
+function main() {
+    const lor = new HashMap()
+    lor.MAX_LOAD_RATIO = .5
+    lor.SIZE_RATIO - 3
+
+    lor.set("Hobbit", "Bilbo")
+    lor.set("Hobbit", "Frodo")
+    lor.set("Wizard", "Galdalf")
+    lor.set("Maiar", "The Necromancer")
+    lor.set("Maiar", "Sauron")
+    lor.set("RingBearer", "Gollum")
+    lor.set("LadyOfLight", "Galadriel")
+    lor.set("HalfElven", "Arwen")
+    lor.set("Ent", "Treebeard")
+
+    console.log(lor)
+    console.log(lor.get("Hobbit"))
+    console.log(lor.get("Maiar"))
+}
+
+//yes all items were hashed, but some got overidden by the same key
+//Sauran & Frodo
+//discprepancy beacuse the second value for the same key of hobbit and maiar replaced the inital value
+//capacity: 8. it never got resized since only 7 of the slots are taken
+
+// main()
+
+
+//console logs 20 and 10
+
+const WhatDoesThisDo = function () {
+    let str1 = 'Hello World.';
+    let str2 = 'Hello World.';
+    let map1 = new HashMap();
+    map1.set(str1, 10);
+    map1.set(str2, 20);
+    let map2 = new HashMap();
+    let str3 = str1;
+    let str4 = str2;
+    map2.set(str3, 20);
+    map2.set(str4, 10);
+
+    console.log(map1.get(str1));
+    console.log(map2.get(str3));
+}
+WhatDoesThisDo()
+
+
+
+
+
+
+
+
+
+//10 % 11 = 10
+//22 % 11 = 0
+//31 % 11 = 9
+//4 % 11 = 4
+//15 % 11 = 4
+//28 % 11 = 6
+//17 % 11 = 6
+//88 % 11 = 0
+//59 % 11 = 4
+//3. 
+// 1. {22*, 88*, 2, 3, 4*, 15*, 28*, 17*, 59*, 31*, 10*}
+
+// 2. 
+
+//5 % 9 = 5
+//28 % 9 = 1
+//19 % 9 = 1
+//15 % 9 = 6
+//20 % 9 = 2
+//33 % 9 = 5
+//12 % 9 = 3
+//17 % 9 = 8
+//10 % 9 = 1
+
+// {0, 28* -> 19* -> 10*, 20*, 12*, 4, 5* -> 33*, 15*, 7, 17*}
