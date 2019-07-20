@@ -208,28 +208,24 @@ function isPalindrome(str) {
 // Write an algorithm to group a list of words into anagrams.For example, if the input was['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race'], the output should be: [['east', 'teas', 'eats'], ['cars', 'arcs'], ['acre', 'race']].
 
 function anagram(arr) {
-    const outerArr = []
+    const obj = {}
 
-    function equalStr(str1, str2) {
-        let arr1 = str1.split("")
-
-        for (let i = 0; i < str2.length; i++) {
-            if (arr1.includes(str2[i])) {
-                arr1.splice(arr1.indexOf(str2[i]), 1)
-            }
-
-        }
-        return arr1.length === 0
+    function sortedWord(str) {
+        return str.split("").sort().join(',')
     }
 
     for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < outArr.length; j++) {
-            // if (equalStr(outerArr[j], arr[i])) {
-            // }
-            outArr = [...outerArr, [arr[i]]]
-            console.log(outerArr)
+        if (!obj[sortedWord(arr[i])]) {
+            obj[sortedWord(arr[i])] = [arr[i]]
+        } else {
+            obj[sortedWord(arr[i])].push(arr[i])
         }
     }
+
+    const solution = []
+
+    Object.keys(obj).forEach(key => solution.push(obj[key]))
+    return solution
 }
 
-anagram()
+anagram(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race'])
